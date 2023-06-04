@@ -1,8 +1,19 @@
-import React from 'react';
+import { Container } from "react-bootstrap";
+import Footer from "./components/Footer";
+import Header from "./components/Header"
+
 
 const App = () => {
   return (
-    <h1>App</h1>
+    <>
+      <Header/>
+        <main className="py-3">
+          <Container>
+              Welcome to proShop
+          </Container>
+        </main>
+      <Footer />
+    </>
   )
 }
 
