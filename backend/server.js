@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import connectDB from "./config/db.js"; //NTS use .js ext
 
 dotenv.config();
@@ -9,9 +10,16 @@ const port = process.env.PORT || 5000
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+
+import authRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 
+app.use("/api/auth", authRoutes);
 app.use("/api/product", productRoutes);
 
 app.use(notFound);
