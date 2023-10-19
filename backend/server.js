@@ -19,13 +19,13 @@ import authRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import { errorHandler, notFound } from "./middlewares/errorMiddleware.js";
 
-app.use("/api/auth", authRoutes);
-app.use("/api/product", productRoutes);
+app.use("/api/users", authRoutes);
+app.use("/api/products", productRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
 
-// connectDB();
+connectDB();
 
 
 app.listen(port, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`));

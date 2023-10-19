@@ -8,6 +8,4 @@ Message.defaultProps = {
   variant: 'info',
 };
 
-{/* <Message variant='danger'>{error?.data?.message || error.error}</Message> */}
-
 export default Message;
