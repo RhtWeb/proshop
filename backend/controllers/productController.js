@@ -1,3 +1,5 @@
+import path from 'path';
+import fs from 'fs';
 import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../models/productModel.js";
 
@@ -108,9 +110,22 @@ const updateProduct = asyncHandler(async(req, res) => {
 // @access  Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
+  const imageFileName = product.image.replace('/uploads\\', '');
 
-  if (product) {
+  if(product) {
     await Product.deleteOne({ _id: product._id });
+
+    const __dirname = path.resolve();
+    const imagePath = path.join(__dirname, 'uploads', imageFileName);
+
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+      console.error('Error deleting image:', err);
+      } else {
+      console.log('Image deleted successfully.');
+      }
+    });
+
     res.json({ message: 'Product removed' });
   } else {
     res.status(404);
